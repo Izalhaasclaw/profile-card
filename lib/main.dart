@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: const ProfileCard(
               nama: 'FaizalIsman',
-              nim: '24090074',
+              nim: '24****74',
               kelas: '5D',
-              ttl: 'Tegal-17-02-1999',
+              ttl: 'Tegal-1*-0*-2***',
               photo: AssetImage('assets/img/my photo2.png'),
             ),
           ),
@@ -55,9 +55,9 @@ class ProfileCard extends StatelessWidget {
   const ProfileCard({
     super.key,
     this.nama = 'FaizalIsman',
-    this.nim = '24090074',
+    this.nim = '24****74',
     this.kelas = '5D',
-    this.ttl = 'Tegal-17-02-1999',
+    this.ttl = 'Tegal-0*-0*-2***',
     this.photo,
   });
 
