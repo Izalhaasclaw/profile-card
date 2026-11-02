@@ -12,14 +12,21 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: const Color.fromARGB(255, 225, 225, 225),
+        appBar: AppBar(
+          title: const Text('Biodata Diri - Faizal Isman'),
+          backgroundColor: const Color(0xFF2F3A3C),
+          foregroundColor: Colors.white,
+        ),
         body: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(16),
             child: const ProfileCard(
-              nama: 'FaizalIsman',
-              nim: '24****74',
-              kelas: '5D',
-              ttl: 'Tegal-1*-0*-2***',
+              nama: 'Faizal Isman',
+              nim: '24*****4',
+              kelas: '5D', 
+              ttl: 'Tegal, 0*-0*-20**', // GANTI TTL DI SINI
+              // Pastikan gambar 'my photo2.png' ada di folder assets/img/
+              // dan sudah didaftarkan di pubspec.yaml
               photo: AssetImage('assets/img/my photo2.png'),
             ),
           ),
@@ -38,8 +45,8 @@ const _line = Color(0xFF5F6B6D);
 const _beige = Color(0xFFEFE3D3);
 const _avatar = Color(0xFF545D63);
 
-// Untuk font tulisan tangan seperti di desain, tambahkan paket `google_fonts`
-// lalu ganti ke: GoogleFonts.patrickHand(...) atau GoogleFonts.gaegu(...)
+// Font menggunakan cursive bawaan perangkat. 
+// Untuk hasil terbaik, gunakan package google_fonts (misal: GoogleFonts.patrickHand)
 const _fontFamily = 'cursive';
 
 // ---------------------------------------------------------------------------
@@ -54,10 +61,10 @@ class ProfileCard extends StatelessWidget {
 
   const ProfileCard({
     super.key,
-    this.nama = 'FaizalIsman',
-    this.nim = '24****74',
-    this.kelas = '5D',
-    this.ttl = 'Tegal-0*-0*-2***',
+    required this.nama,
+    required this.nim,
+    required this.kelas,
+    required this.ttl,
     this.photo,
   });
 
@@ -81,10 +88,10 @@ class ProfileCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           const Text(
-            'Profile',
+            'Biodata Diri',
             style: TextStyle(
               fontFamily: _fontFamily,
-              fontSize: 48,
+              fontSize: 40,
               fontWeight: FontWeight.w800,
               color: _ink,
               letterSpacing: 1.5,
@@ -125,7 +132,7 @@ class _Field extends StatelessWidget {
             label,
             style: const TextStyle(
               fontFamily: _fontFamily,
-              fontSize: 26,
+              fontSize: 22,
               fontWeight: FontWeight.w700,
               color: _ink,
             ),
@@ -143,7 +150,7 @@ class _Field extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   fontFamily: _fontFamily,
-                  fontSize: 22,
+                  fontSize: 20,
                   color: _ink,
                 ),
               ),
@@ -164,7 +171,7 @@ class _PhotoFrame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const size = 190.0;
+    const size = 170.0; // Sedikit dikecilkan agar proporsional
     return SizedBox(
       width: size,
       height: size,
@@ -177,8 +184,14 @@ class _PhotoFrame extends StatelessWidget {
             height: size * 0.8,
             decoration: const BoxDecoration(color: _beige, shape: BoxShape.circle),
             child: ClipOval(
+              // Akan error saat runtime (tapi app tidak crash) jika foto tidak ditemukan.
+              // Pastikan foto terdaftar di pubspec.yaml
               child: photo != null
-                  ? Image(image: photo!, fit: BoxFit.cover)
+                  ? Image(
+                      image: photo!, 
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => const _Placeholder(),
+                    )
                   : const _Placeholder(),
             ),
           ),
@@ -198,22 +211,22 @@ class _Placeholder extends StatelessWidget {
       children: [
         // Kepala + ikon kamera
         Positioned(
-          top: 34,
+          top: 30,
           child: Container(
-            width: 50,
-            height: 50,
+            width: 45,
+            height: 45,
             decoration: const BoxDecoration(color: _avatar, shape: BoxShape.circle),
-            child: const Icon(Icons.photo_camera, color: _beige, size: 22),
+            child: const Icon(Icons.photo_camera, color: _beige, size: 20),
           ),
         ),
         // Badan + tulisan FOTO
         Positioned(
           bottom: -2,
           child: Container(
-            width: 84,
-            height: 62,
+            width: 76,
+            height: 56,
             alignment: Alignment.bottomCenter,
-            padding: const EdgeInsets.only(bottom: 12),
+            padding: const EdgeInsets.only(bottom: 10),
             decoration: const BoxDecoration(
               color: _avatar,
               borderRadius: BorderRadius.only(
@@ -225,7 +238,7 @@ class _Placeholder extends StatelessWidget {
               'FOTO',
               style: TextStyle(
                 color: _beige,
-                fontSize: 15,
+                fontSize: 13,
                 fontWeight: FontWeight.w700,
                 letterSpacing: 1,
               ),
